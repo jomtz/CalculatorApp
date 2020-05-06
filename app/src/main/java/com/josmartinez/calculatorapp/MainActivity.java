@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
         final Button percent = findViewById(R.id.percent);
         final Button exponent = findViewById(R.id.exponent);
         final Button squareRoot = findViewById(R.id.square_root);
-        final Button clear = findViewById(R.id.clear);
         final Button n7 = findViewById(R.id.n7);
         final Button n8 = findViewById(R.id.n8);
         final Button n9 = findViewById(R.id.n9);
@@ -49,56 +48,54 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.square_root:
 
                         break;
-                    case R.id.clear:
 
-                        break;
                     case R.id.n7:
-
+                        calculatorScreen.append("7");
                         break;
                     case R.id.n8:
-
+                        calculatorScreen.append("8");
                         break;
                     case R.id.n9:
-
+                        calculatorScreen.append("9");
                         break;
                     case R.id.divide:
 
                         break;
                     case R.id.n4:
-
+                        calculatorScreen.append("4");
                         break;
                     case R.id.n5:
-
+                        calculatorScreen.append("5");
                         break;
                     case R.id.n6:
-
+                        calculatorScreen.append("6");
                         break;
                     case R.id.multiply:
 
                         break;
                     case R.id.n1:
-
+                        calculatorScreen.append("1");
                         break;
                     case R.id.n2:
-
+                        calculatorScreen.append("2");
                         break;
                     case R.id.n3:
-
+                        calculatorScreen.append("3");
                         break;
                     case R.id.subtract:
 
                         break;
                     case R.id.n0:
-
+                        calculatorScreen.append("0");
                         break;
                     case R.id.dot:
-
+                        calculatorScreen.append(".");
                         break;
                     case R.id.equals:
 
                         break;
                     case R.id.add:
-
+                        calculatorScreen.append("+");
                         break;
                 }
             }
@@ -106,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
         percent.setOnClickListener(calculatorListener);
         exponent.setOnClickListener(calculatorListener);
         squareRoot.setOnClickListener(calculatorListener);
-        clear.setOnClickListener(calculatorListener);
         n7.setOnClickListener(calculatorListener);
         n8.setOnClickListener(calculatorListener);
         n9.setOnClickListener(calculatorListener);
@@ -123,5 +119,14 @@ public class MainActivity extends AppCompatActivity {
         dot.setOnClickListener(calculatorListener);
         equals.setOnClickListener(calculatorListener);
         add.setOnClickListener(calculatorListener);
+
+        final Button clear = findViewById(R.id.clear);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculatorScreen.setText("");
+            }
+        });
+
     }
 }
