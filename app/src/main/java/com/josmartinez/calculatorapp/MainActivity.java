@@ -9,6 +9,14 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private boolean isOperationPressed = false;
+
+    private double firstNumber = 0;
+
+    private int secondNumberIndex = 0;
+
+    private char currentOperation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,10 +100,23 @@ public class MainActivity extends AppCompatActivity {
                         calculatorScreen.append(".");
                         break;
                     case R.id.equals:
-
+                        if(isOperationPressed){
+                           if(currentOperation=='+'){
+                               String screenContent = calculatorScreen.getText().toString();
+//                               String secondNumberString = screenContent.substring(secondNumberIndex,screenContent.length());
+                               double secondNumber = Double.parseDouble(screenContent.substring(secondNumberIndex,screenContent.length()));
+                               secondNumber+=firstNumber;
+                               calculatorScreen.setText(String.valueOf(secondNumber));
+                           }
+                        }
                         break;
                     case R.id.add:
+                        String screenContent = calculatorScreen.getText().toString();
+                        secondNumberIndex = screenContent.length() + 1;
+                        firstNumber = Double.parseDouble(screenContent);
                         calculatorScreen.append("+");
+                        isOperationPressed = true;
+                        currentOperation = '+';
                         break;
                 }
             }
