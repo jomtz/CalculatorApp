@@ -9,145 +9,208 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean isOperationPressed = false;
+    private TextView screen;
 
-    private double firstNumber = 0;
+    private String display = "";
 
-    private int secondNumberIndex = 0;
-
-    private char currentOperation;
+    private String currentOperator = "";
+//    private boolean isOperationPressed = false;
+//
+//    private double firstNumber = 0;
+//
+//    private int secondNumberIndex = 0;
+//
+//    private char currentOperation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mlayout);
-        final TextView calculatorScreen = findViewById(R.id.calculatorScreen);
-        final Button percent = findViewById(R.id.percent);
-        final Button exponent = findViewById(R.id.exponent);
-        final Button squareRoot = findViewById(R.id.square_root);
-        final Button n7 = findViewById(R.id.n7);
-        final Button n8 = findViewById(R.id.n8);
-        final Button n9 = findViewById(R.id.n9);
-        final Button divide = findViewById(R.id.divide);
-        final Button n4 = findViewById(R.id.n4);
-        final Button n5 = findViewById(R.id.n5);
-        final Button n6 = findViewById(R.id.n6);
-        final Button multiply = findViewById(R.id.multiply);
-        final Button n1 = findViewById(R.id.n1);
-        final Button n2 = findViewById(R.id.n2);
-        final Button n3 = findViewById(R.id.n3);
-        final Button subtract = findViewById(R.id.subtract);
-        final Button n0 = findViewById(R.id.n0);
-        final Button dot = findViewById(R.id.dot);
-        final Button equals = findViewById(R.id.equals);
-        final Button add = findViewById(R.id.add);
+        // Calculator Screen
+        screen = findViewById(R.id.calculatorScreen);
+        screen.setText(display);
 
-        final View.OnClickListener calculatorListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int id = v.getId();
-                switch (id){
-                    case R.id.percent:
+//        // First row of buttons
+//        final Button clear = findViewById(R.id.clear);
+//        final Button plusMinus = findViewById(R.id.plus_minus);
+//        final Button percent = findViewById(R.id.percent);
+//        final Button division = findViewById(R.id.division);
+//
+//        // Second row of buttons
+//        final Button seven = findViewById(R.id.number_7);
+//        final Button eight = findViewById(R.id.number_8);
+//        final Button nine = findViewById(R.id.number_9);
+//        final Button multiplication = findViewById(R.id.multiplication);
+//
+//        // Third row of buttons
+//        final Button four = findViewById(R.id.number_4);
+//        final Button five = findViewById(R.id.number_5);
+//        final Button six = findViewById(R.id.number_6);
+//        final Button minus = findViewById(R.id.minus);
+//
+//        // Fourth row of buttons
+//        final Button one = findViewById(R.id.number_1);
+//        final Button two = findViewById(R.id.number_2);
+//        final Button three = findViewById(R.id.number_3);
+//        final Button plus = findViewById(R.id.plus);
+//
+//        // Fifth row of buttons
+//        final Button zero = findViewById(R.id.number_0);
+//        final Button dot = findViewById(R.id.dot);
+//        final Button result = findViewById(R.id.result);
+//
+//        final View.OnClickListener calculatorListener = new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final int id = v.getId();
+//                switch (id){
+//
+//                        // row 1
+//                    case R.id.clear:
+//                        display = "";
+//                        currentOperator = "";
+//                        break;
+//                    case R.id.plus_minus:
+//                        // change to minus
+//                        break;
+//                    case R.id.percent:
+//                        screen.append("%");
+//                        break;
+//                    case R.id.division:
+//                        screen.append("/");
+//                        break;
+//
+//                        // row 2
+//                    case R.id.number_7:
+//                        screen.append("7");
+//                        break;
+//                    case R.id.number_8:
+//                        screen.append("8");
+//                        break;
+//                    case R.id.number_9:
+//                        screen.append("9");
+//                        break;
+//                    case R.id.multiplication:
+//                        screen.append("x");
+//
+//                        // row 3
+//                    case R.id.number_4:
+//                        screen.append("4");
+//                        break;
+//                    case R.id.number_5:
+//                        screen.append("5");
+//                        break;
+//                    case R.id.number_6:
+//                        screen.append("6");
+//                        break;
+//                    case R.id.minus:
+//                        screen.append("-");
+//
+//                        // row 4
+//                    case R.id.number_1:
+//                        screen.append("1");
+//                        break;
+//                    case R.id.number_2:
+//                        screen.append("2");
+//                        break;
+//                    case R.id.number_3:
+//                        screen.append("3");
+//                        break;
+//                    case R.id.plus:
+//                        screen.append("+");
+//
+//
+//                        // row 3
+//                    case R.id.number_0:
+//                        screen.append("0");
+//                        break;
+//                    case R.id.dot:
+//                        screen.append(".");
+//                        break;
+//                    case R.id.result:
+//                        screen.append("6");
+//                        break;
+//
+////                    case R.id.equals:
+////                        if(isOperationPressed){
+////                           if(currentOperation=='+'){
+////                               String screenContent = calculatorScreen.getText().toString();
+//////                               String secondNumberString = screenContent.substring(secondNumberIndex,screenContent.length());
+////                               double secondNumber = Double.parseDouble(screenContent.substring(secondNumberIndex,screenContent.length()));
+////                               secondNumber+=firstNumber;
+////                               calculatorScreen.setText(String.valueOf(secondNumber));
+////                           }
+////                        }
+////                        break;
+////                    case R.id.add:
+////                        String screenContent = calculatorScreen.getText().toString();
+////                        secondNumberIndex = screenContent.length() + 1;
+////                        firstNumber = Double.parseDouble(screenContent);
+////                        calculatorScreen.append("+");
+////                        isOperationPressed = true;
+////                        currentOperation = '+';
+////                        break;
+//                }
+//            }
+//        };
+//        // 1
+//        clear.setOnClickListener(calculatorListener);
+//        plusMinus.setOnClickListener(calculatorListener);
+//        percent.setOnClickListener(calculatorListener);
+//        division.setOnClickListener(calculatorListener);
+//
+//        // 2
+//        seven.setOnClickListener(calculatorListener);
+//        eight.setOnClickListener(calculatorListener);
+//        nine.setOnClickListener(calculatorListener);
+//        multiplication.setOnClickListener(calculatorListener);
+//
+//        // 3
+//        four.setOnClickListener(calculatorListener);
+//        five.setOnClickListener(calculatorListener);
+//        six.setOnClickListener(calculatorListener);
+//        minus.setOnClickListener(calculatorListener);
+//
+//        // 4
+//        one.setOnClickListener(calculatorListener);
+//        two.setOnClickListener(calculatorListener);
+//        three.setOnClickListener(calculatorListener);
+//        plus.setOnClickListener(calculatorListener);
+//
+//        // 5
+//        zero.setOnClickListener(calculatorListener);
+//        dot.setOnClickListener(calculatorListener);
+//        result.setOnClickListener(calculatorListener);
+    }
 
-                        break;
-                    case R.id.exponent:
+    private void updateScreen() {
+        screen.setText(display);
+    }
 
-                        break;
-                    case R.id.square_root:
+    public void onClickNumber(View view) {
+        Button b = (Button) view;
+        display += b.getText();
+        updateScreen();
+    }
 
-                        break;
+    public void onClickOperator(View view){
+        Button b = (Button) view;
+        display += b.getText();
+        currentOperator += b.getText().toString();
+        updateScreen();
+    }
 
-                    case R.id.n7:
-                        calculatorScreen.append("7");
-                        break;
-                    case R.id.n8:
-                        calculatorScreen.append("8");
-                        break;
-                    case R.id.n9:
-                        calculatorScreen.append("9");
-                        break;
-                    case R.id.divide:
+    public void clear(){
+        display = "";
+        currentOperator = "";
+    }
 
-                        break;
-                    case R.id.n4:
-                        calculatorScreen.append("4");
-                        break;
-                    case R.id.n5:
-                        calculatorScreen.append("5");
-                        break;
-                    case R.id.n6:
-                        calculatorScreen.append("6");
-                        break;
-                    case R.id.multiply:
+    public void onClickClear(View view){
+        clear();
+        updateScreen();
+    }
 
-                        break;
-                    case R.id.n1:
-                        calculatorScreen.append("1");
-                        break;
-                    case R.id.n2:
-                        calculatorScreen.append("2");
-                        break;
-                    case R.id.n3:
-                        calculatorScreen.append("3");
-                        break;
-                    case R.id.subtract:
-
-                        break;
-                    case R.id.n0:
-                        calculatorScreen.append("0");
-                        break;
-                    case R.id.dot:
-                        calculatorScreen.append(".");
-                        break;
-                    case R.id.equals:
-                        if(isOperationPressed){
-                           if(currentOperation=='+'){
-                               String screenContent = calculatorScreen.getText().toString();
-//                               String secondNumberString = screenContent.substring(secondNumberIndex,screenContent.length());
-                               double secondNumber = Double.parseDouble(screenContent.substring(secondNumberIndex,screenContent.length()));
-                               secondNumber+=firstNumber;
-                               calculatorScreen.setText(String.valueOf(secondNumber));
-                           }
-                        }
-                        break;
-                    case R.id.add:
-                        String screenContent = calculatorScreen.getText().toString();
-                        secondNumberIndex = screenContent.length() + 1;
-                        firstNumber = Double.parseDouble(screenContent);
-                        calculatorScreen.append("+");
-                        isOperationPressed = true;
-                        currentOperation = '+';
-                        break;
-                }
-            }
-        };
-        percent.setOnClickListener(calculatorListener);
-        exponent.setOnClickListener(calculatorListener);
-        squareRoot.setOnClickListener(calculatorListener);
-        n7.setOnClickListener(calculatorListener);
-        n8.setOnClickListener(calculatorListener);
-        n9.setOnClickListener(calculatorListener);
-        divide.setOnClickListener(calculatorListener);
-        n4.setOnClickListener(calculatorListener);
-        n5.setOnClickListener(calculatorListener);
-        n6.setOnClickListener(calculatorListener);
-        multiply.setOnClickListener(calculatorListener);
-        n1.setOnClickListener(calculatorListener);
-        n2.setOnClickListener(calculatorListener);
-        n3.setOnClickListener(calculatorListener);
-        subtract.setOnClickListener(calculatorListener);
-        n0.setOnClickListener(calculatorListener);
-        dot.setOnClickListener(calculatorListener);
-        equals.setOnClickListener(calculatorListener);
-        add.setOnClickListener(calculatorListener);
-
-        final Button clear = findViewById(R.id.clear);
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculatorScreen.setText("");
-            }
-        });
+    public void onClickResult(View view){
 
     }
 }
