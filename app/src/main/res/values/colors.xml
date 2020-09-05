@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="white_sign">#FFFFFF</color>
+    <color name="colorPrimary">#363636</color>
+    <color name="colorPrimaryDark">#111111</color>
+    <color name="colorAccent">#4169E1</color>
+    <color name="white_sign">#D2691E</color>
+
+    <!-- Color of buttons-->
+    <color name="numbers_color">#F2F2F2</color>
+    <color name="signs_color">#838383</color>
+    <color name="orange">#D2691E</color>
+
 </resources>
