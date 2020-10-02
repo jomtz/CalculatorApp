@@ -3,6 +3,7 @@ package com.josmartinez.calculatorapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,16 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView screen;
     private String display = "";
     private String currentOperator = "";
-    private Double screenResult = (double) 0;
-
-
-//    private boolean isOperationPressed = false;
-
-//    private double firstNumber = 0;
-//
-//    private int secondNumber = 0;
-//
-//    private char currentOperation;
+    private String screenResult = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         // Calculator Screen
         screen = findViewById(R.id.screen);
         screen.setText(display);
-
-
     }
 
 
@@ -42,25 +32,61 @@ public class MainActivity extends AppCompatActivity {
         screen.setText(display);
     }
 
-
-
-
     public void onClickNumber(View view) {
+        if(!screenResult.equals("")){
+            clear();
+            updateScreen();
+        }
         Button b = (Button) view;
         display += b.getText();
         updateScreen();
     }
 
+
+    private boolean isOperator(char op){
+        switch (op){
+            case '+':
+            case '-':
+            case 'x':
+            case '÷':return true;
+            default: return false;
+        }
+    }
+
+
     public void onClickOperator(View view){
-        Button b = (Button) view;
+        if(display.equals("")) return;
+
+        Button b = (Button)view;
+
+        if(!screenResult.equals("")){
+            String _display = screenResult;
+            clear();
+            display = _display;
+        }
+
+        if(!currentOperator.equals("")){
+            Log.d("CalcX", ""+display.charAt(display.length()-1));
+            if(isOperator(display.charAt(display.length()-1))){
+                display = display.replace(display.charAt(display.length()-1), b.getText().charAt(0));
+                updateScreen();
+                return;
+            }else{
+                getResult();
+                display = screenResult;
+                screenResult = "";
+            }
+            currentOperator = b.getText().toString();
+        }
         display += b.getText();
-        currentOperator += b.getText().toString();
+        currentOperator = b.getText().toString();
         updateScreen();
     }
 
     private void clear(){
         display = "";
         currentOperator = "";
+        screenResult = "";
     }
 
     public void onClickClear(View view){
@@ -82,13 +108,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickEquals(View view){
+    private boolean getResult(){
+        if(currentOperator.equals("")) return false;
         String[] operation = display.split(Pattern.quote(currentOperator));
-        if (operation.length < 2) return;
+        if(operation.length < 2) return false;
+        screenResult = String.valueOf(operate(operation[0], operation[1], currentOperator));
+        return true;
+    }
 
-        double result = operate(operation[0], operation[1], currentOperator );
-        screen.setText(String.valueOf(result));
-
+    public void onClickEquals(View view){
+        if(display.equals("")) return;
+        if(!getResult()) return;
+        screen.setText(String.format("%s\n%s", display, screenResult));
     }
 
 
